@@ -7,7 +7,7 @@ server_url = 'http://10.24.105.32:4245/tokenize'
 test_url = 'http://10.24.18.15:4245/tokenize'
 
 
-def get_sentences_encoding(sentences: list[str], url=None) -> np.array:
+def get_sentences_encoding(sentences: list, url=None) -> np.array:
     if not all(isinstance(s, str) for s in sentences):
         raise TypeError("Input must be a list of strings.")
     # Input data

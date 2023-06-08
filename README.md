@@ -1,4 +1,4 @@
 # AIServices
 
 ## installation
-`pip install git+https://github.com/Andalusia-Data-Science-Team/AIServices`
+`pip install git+https://github.com/Andalusia-Data-Science-Team/AHBS_AIServices`
