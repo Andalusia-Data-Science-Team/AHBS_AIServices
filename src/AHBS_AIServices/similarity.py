@@ -67,6 +67,9 @@ def get_topk(np_array: np, k=10):
 
 
 def clean_txt(txt: str, to_lower=False, strip=False, all_except=None):
+    if txt is None or len(txt) == 0:
+        return txt
+    txt = str(txt)
     if all_except is not None:
         punc_set = set([c for c in string.punctuation if c not in all_except])
     else:
