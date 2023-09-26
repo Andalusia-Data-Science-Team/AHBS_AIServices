@@ -1,4 +1,3 @@
-import numpy
 import string
 import requests
 import numpy as np
@@ -34,7 +33,7 @@ def get_sentences_encoding(sentences: list, url=None) -> np.array:
     return embeddings
 
 
-def sentences_dot_product(sentences_matrix1: numpy, sentences_matrix2: numpy):
+def sentences_dot_product(sentences_matrix1: np, sentences_matrix2: np):
     """
     calculate similarity between matrix 1 and matrix 2
     :param: sentences_matrix1 numpy matrix (no_sentences,features_dim)
@@ -45,7 +44,7 @@ def sentences_dot_product(sentences_matrix1: numpy, sentences_matrix2: numpy):
     return np.dot(sentences_matrix1, np.transpose(sentences_matrix2))
 
 
-def sentences_cosine_similarity(sentences_matrix1: numpy, sentences_matrix2: numpy):
+def sentences_cosine_similarity(sentences_matrix1: np, sentences_matrix2: np):
     """
     calculate similarity between matrix 1 and matrix 2
     :param: sentences_matrix1 numpy matrix (no_sentences,features_dim)
@@ -62,7 +61,7 @@ def sentences_cosine_similarity(sentences_matrix1: numpy, sentences_matrix2: num
     return similarity_cos_mat  # %%
 
 
-def get_topk(np_array: numpy, k=10):
+def get_topk(np_array: np, k=10):
     sorted_indices = np.argsort(np_array)[::-1]
     return sorted_indices[:k + 1]
 
@@ -93,3 +92,42 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None):
             new_txt = new_txt[start:end]
 
     return "".join(new_txt)
+
+
+def get_sentences_similarity(sentence_list_1, sentence_list_2, get_score=True, keep_special_chars: list = None,
+                             url=None) -> list:
+    """
+    get similarity score between two list of sentences
+    :param sentence_list_1: list of strings
+    :param sentence_list_2: list of strings
+    :param get_score: bool set to true if you want to get the similarity score
+    :param keep_special_chars: list of special characters to keep while cleaning the text
+    :param url: url to the server of bert-tokenizer ip:port/route
+    :return: list of matches [[sent_list_1[i],matched text in list of sent-2,score (optional) ]]
+    """
+    if url is None:
+        url = server_url
+
+    sentence_list_1_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
+                            sentence_list_1]
+    sentence_list_1_enc = get_sentences_encoding(sentence_list_1_prep, url)
+
+    sentence_list_2_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
+                            sentence_list_2]
+    sentence_list_2_enc = get_sentences_encoding(sentence_list_2_prep, url)
+
+    similarity_matrix = sentences_cosine_similarity(sentence_list_1_enc, sentence_list_2_enc)
+
+    no_sentences = len(sentence_list_1)
+
+    top_match_result = []
+    for sent_idx in range(no_sentences):
+        top_sent_idx = get_topk(similarity_matrix[sent_idx], k=1)[0]
+
+        top_match_sent = sentence_list_2[top_sent_idx]
+        top_match_score = similarity_matrix[sent_idx, top_sent_idx]
+        match_row = [sentence_list_1[sent_idx], top_match_sent]
+        if get_score:
+            match_row.append(top_match_score)
+        top_match_result.append(match_row)
+    return top_match_result
