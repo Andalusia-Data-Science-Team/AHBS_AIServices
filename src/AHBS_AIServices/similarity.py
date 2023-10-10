@@ -81,18 +81,19 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None):
                 new_txt.append(char.lower())
             else:
                 new_txt.append(char)
-    if strip:
-        start = 0
-        end = None
-        if new_txt[0] == ' ':
-            start = 1
-        if new_txt[-1] == ' ':
-            end = -1
+    if len(new_txt)>0:
+        if strip:
+            start = 0
+            end = None
+            if new_txt[0] == ' ':
+                start = 1
+            if new_txt[-1] == ' ':
+                end = -1
 
-        if end is None:
-            new_txt = new_txt[start:]
-        else:
-            new_txt = new_txt[start:end]
+            if end is None:
+                new_txt = new_txt[start:]
+            else:
+                new_txt = new_txt[start:end]
 
     return "".join(new_txt)
 
