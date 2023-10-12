@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setuptools.setup(
     name='AHBS_AIServices',
-    version='0.0.32',
+    version='0.0.33',
     author='Ahmed badr',
     author_email='ahmed.k.badr.97@gmail.com',
     description='andalusia ai services',

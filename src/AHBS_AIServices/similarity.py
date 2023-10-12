@@ -2,7 +2,7 @@ import string
 import requests
 import numpy as np
 
-server_url = 'http://10.24.105.32:4245/tokenize'
+server_url = 'http://10.24.105.160:4245/tokenize'
 test_url = 'http://10.24.18.15:4245/tokenize'
 
 
