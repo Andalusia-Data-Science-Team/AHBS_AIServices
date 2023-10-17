@@ -66,7 +66,7 @@ def get_topk(np_array: np, k=10):
     return sorted_indices[:k + 1]
 
 
-def clean_txt(txt: str, to_lower=False, strip=False, all_except=None):
+def clean_txt(txt: str, to_lower=False, strip=False, all_except=None,replace_with:str=None):
     if txt is None or len(txt) == 0:
         return txt
     txt = str(txt)
@@ -81,6 +81,9 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None):
                 new_txt.append(char.lower())
             else:
                 new_txt.append(char)
+        elif replace_with:
+            new_txt.append(replace_with)
+
     if len(new_txt)>0:
         if strip:
             start = 0
