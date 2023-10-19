@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setuptools.setup(
     name='AHBS_AIServices',
-    version='0.0.34',
+    version='0.1.0',
     author='Ahmed badr',
     author_email='ahmed.k.badr.97@gmail.com',
     description='andalusia ai services',
@@ -17,5 +17,5 @@ setuptools.setup(
     packages=['AHBS_AIServices'],
     package_dir={
         'AHBS_AIServices': 'src/AHBS_AIServices'},
-    install_requires=['numpy', 'requests','chardet'],
+    install_requires=['numpy', 'requests','chardet','pyaudio','keyboard'],
 )
