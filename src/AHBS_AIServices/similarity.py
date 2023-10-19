@@ -101,7 +101,7 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None,replace_wit
     return "".join(new_txt)
 
 
-def get_sentences_similarity(sentence_list_1, sentence_list_2, get_score=True, keep_special_chars: list = None,
+def get_sentences_similarity(sentence_list_1, sentence_list_2=None,sentence_list_2_enc=None, get_score=True, keep_special_chars: list = None,
                              url=None) -> list:
     """
     get similarity score between two list of sentences
@@ -114,14 +114,18 @@ def get_sentences_similarity(sentence_list_1, sentence_list_2, get_score=True, k
     """
     if url is None:
         url = server_url
+    if sentence_list_2 is None and sentence_list_2_enc is None:
+        raise Exception("target not passed sentence_list_2 or sentence_list_2_encodings")
+
 
     sentence_list_1_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
                             sentence_list_1]
     sentence_list_1_enc = get_sentences_encoding(sentence_list_1_prep, url)
 
-    sentence_list_2_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
-                            sentence_list_2]
-    sentence_list_2_enc = get_sentences_encoding(sentence_list_2_prep, url)
+    if sentence_list_1_enc is None:
+        sentence_list_2_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
+                                sentence_list_2]
+        sentence_list_2_enc = get_sentences_encoding(sentence_list_2_prep, url)
 
     similarity_matrix = sentences_cosine_similarity(sentence_list_1_enc, sentence_list_2_enc)
 
