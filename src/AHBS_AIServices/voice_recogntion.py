@@ -154,3 +154,10 @@ def get_text_from_voice(file_path, url=None, keep_record_file=False, record_abbr
     else:
         print("Error:", response.text)
     return None
+
+
+def is_voice_server_connected(url=None):
+    if url is None:
+        url = SERVER_URL
+    response = requests.post(url + '/test')
+    return response.status_code == 200 and response.text == 'test-ok'
