@@ -66,7 +66,7 @@ def get_topk(np_array: np, k=10):
     return sorted_indices[:k + 1]
 
 
-def clean_txt(txt: str, to_lower=False, strip=False, all_except=None,replace_with:str=None):
+def clean_txt(txt: str, to_lower=False, strip=False, all_except=None, replace_with: str = None):
     if txt is None or len(txt) == 0:
         return txt
     txt = str(txt)
@@ -84,7 +84,7 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None,replace_wit
         elif replace_with:
             new_txt.append(replace_with)
 
-    if len(new_txt)>0:
+    if len(new_txt) > 0:
         if strip:
             start = 0
             end = None
@@ -101,7 +101,8 @@ def clean_txt(txt: str, to_lower=False, strip=False, all_except=None,replace_wit
     return "".join(new_txt)
 
 
-def get_sentences_similarity(sentence_list_1, sentence_list_2=None,sentence_list_2_enc=None, get_score=True, keep_special_chars: list = None,
+def get_sentences_similarity(sentence_list_1, sentence_list_2: list = None, sentence_list_2_enc: np = None,
+                             get_score=True, keep_special_chars: list = None,
                              url=None) -> list:
     """
     get similarity score between two list of sentences
@@ -116,7 +117,6 @@ def get_sentences_similarity(sentence_list_1, sentence_list_2=None,sentence_list
         url = server_url
     if sentence_list_2 is None and sentence_list_2_enc is None:
         raise Exception("target not passed sentence_list_2 or sentence_list_2_encodings")
-
 
     sentence_list_1_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
                             sentence_list_1]
