@@ -122,7 +122,7 @@ def get_sentences_similarity(sentence_list_1, sentence_list_2: list = None, sent
                             sentence_list_1]
     sentence_list_1_enc = get_sentences_encoding(sentence_list_1_prep, url)
 
-    if sentence_list_1_enc is None:
+    if sentence_list_2_enc is None:
         sentence_list_2_prep = [clean_txt(sent, strip=True, to_lower=True, all_except=keep_special_chars) for sent in
                                 sentence_list_2]
         sentence_list_2_enc = get_sentences_encoding(sentence_list_2_prep, url)
