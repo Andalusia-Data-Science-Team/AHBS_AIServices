@@ -85,6 +85,7 @@ class VoiceRecorder:
 
         print(f"Audio saved as {file_path}")
         self.last_audio_f_path = file_path
+        time.sleep(0.3)
         if self.on_start_action is not None:
             self.on_start_action()
 
