@@ -164,5 +164,4 @@ def is_voice_server_connected(url=None):
     return response.status_code == 200 and response.text == 'test-ok'
 
 
-def get_url(ip, port):
-    return f"http://{ip}:{port}"
+
