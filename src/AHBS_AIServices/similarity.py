@@ -2,8 +2,8 @@ import string
 import requests
 import numpy as np
 
-server_url = 'http://10.24.105.160:4245/tokenize'
-test_url = 'http://10.24.18.15:4245/tokenize'
+server_url = 'http://10.24.105.160:4245'
+test_url = 'http://10.24.18.15:4245'
 
 
 def get_sentences_encoding(sentences: list, url=None) -> np.array:
@@ -17,7 +17,7 @@ def get_sentences_encoding(sentences: list, url=None) -> np.array:
     }
 
     # Send POST request
-    response = requests.post(url, json=data)
+    response = requests.post(url+"/tokenize", json=data)
 
     # Check the response status code
     if response.status_code == 200:
