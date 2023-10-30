@@ -132,16 +132,17 @@ def load_voice_abbreviations(abbreviation_names: list, url=None):
         print("error loading abbreviations")
 
 
-def get_text_from_voice(file_path, url=None, keep_record_file=False, record_abbreviation=None):
+def get_text_from_voice(file_path, url=None, keep_record_file=False, abbreviation_text=None, abbreviation_audio=None):
     if url is None:
         url = SERVER_URL
     with open(file_path, 'rb') as f:
         files = {'voice_file': (os.path.basename(file_path), f)}
 
-        if record_abbreviation is not None:
-            data = {
-                'abbreviation': record_abbreviation
-            }
+        data = {}
+        if abbreviation_audio is not None:
+            data['abbreviation_audio'] = abbreviation_audio
+        if abbreviation_text is not None:
+            data['abbreviation_text'] = abbreviation_text
 
             response = requests.post(url + '/voice_recognition', files=files, data=data)
         else:
@@ -162,6 +163,3 @@ def is_voice_server_connected(url=None):
         url = SERVER_URL
     response = requests.post(url + '/test')
     return response.status_code == 200 and response.text == 'test-ok'
-
-
-
