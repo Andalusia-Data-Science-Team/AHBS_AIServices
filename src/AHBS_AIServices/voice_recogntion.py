@@ -144,6 +144,7 @@ def get_text_from_voice(file_path, url=None, keep_record_file=False, abbreviatio
         if abbreviation_text is not None:
             data['abbreviation_text'] = abbreviation_text
 
+        if abbreviation_text is not None or abbreviation_audio is not None:
             response = requests.post(url + '/voice_recognition', files=files, data=data)
         else:
             response = requests.post(url + '/voice_recognition', files=files)
