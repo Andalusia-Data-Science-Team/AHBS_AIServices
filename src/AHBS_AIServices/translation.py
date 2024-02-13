@@ -1,7 +1,7 @@
 import requests
 
 
-def translate_file(file_path, output_path, server_ip=None, port=None):
+def translate_file(file_path: str, output_path: str, server_ip: str = None, port: int = None):
     """
 
     :param file_path: (str) input file path ex 'path/test.xlsx'
