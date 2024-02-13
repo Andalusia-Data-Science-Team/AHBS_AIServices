@@ -72,3 +72,15 @@ f_path=voice_recorder.last_audio_f_path
 # sending voice and abbreviation name to be used in the voice recognition
 text=voice_recogntion.get_text(f_path,record_abbreviation='medication')
 ```
+## Translate
+- Arguments (source_file_path,output_file_path,server_ip(optional default Ai server),port (optional default 2002))
+### call from server
+```python
+from  AHBS_AIServices import translation
+translation.translate_file(file_path="test.xlsx",output_path='test_english.xlsx')
+```
+### call from another pc
+```python
+from  AHBS_AIServices import translation
+translation.translate_file(file_path="test.xlsx",output_path='test_english.xlsx',server_ip='10.24.18.37')
+```

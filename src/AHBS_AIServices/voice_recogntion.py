@@ -116,7 +116,6 @@ def send_voice_abbreviation(file_path, url=None):
     with open(file_path, 'rb') as f:
         files = {'voice_file': (os.path.basename(file_path), f)}
         response = requests.post(url + '/upload_abbreviations', files=files)
-
     return response.json
 
 
